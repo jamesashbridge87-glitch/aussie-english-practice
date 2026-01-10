@@ -235,7 +235,7 @@ export function AussieEnglishPractice() {
         <div className="start-section">
           <div className="instructions">
             <h2>G'day, mate!</h2>
-            <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation.</p>
+            <p>Ready to practice your Aussie English? Choose a mode and start a voice conversation, or practice your pronunciation below.</p>
           </div>
 
           <PracticeModeSelector
@@ -247,8 +247,19 @@ export function AussieEnglishPractice() {
             className="start-button"
             onClick={startSession}
           >
-            Start Practice Session
+            Start Aussie Chat
           </button>
+          <p className="button-subtitle">Chat with Your Aussie Uncle</p>
+
+          {/* Standalone Pronunciation Practice */}
+          <div className="pronunciation-section">
+            <h3 className="section-title">Aussie Pronunciation</h3>
+            <p className="section-subtitle">Practice saying phrases and get scored</p>
+            <PronunciationPractice
+              mode={selectedMode}
+              isSessionActive={true}
+            />
+          </div>
         </div>
       ) : (
         <div className="session-section">
@@ -296,12 +307,6 @@ export function AussieEnglishPractice() {
               ))
             )}
           </div>
-
-          {/* Pronunciation Practice */}
-          <PronunciationPractice
-            mode={selectedMode}
-            isSessionActive={isSessionActive}
-          />
 
           {/* Text input option */}
           <div className="text-input-section">

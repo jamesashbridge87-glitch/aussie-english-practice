@@ -320,6 +320,33 @@
   background: #94a3b8;
 }
 
+/* Button subtitle */
+.button-subtitle {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Pronunciation section on homepage */
+.pronunciation-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.section-title {
+  margin: 0 0 4px 0;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.section-subtitle {
+  margin: 0 0 20px 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .aussie-practice-container {
