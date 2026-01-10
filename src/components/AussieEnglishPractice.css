@@ -1,0 +1,344 @@
+.aussie-practice-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.practice-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.practice-header h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #1a1a2e;
+}
+
+.practice-header p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.toggle-progress-btn {
+  padding: 8px 16px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #4b5563;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle-progress-btn:hover {
+  background-color: #e2e8f0;
+}
+
+/* Error message */
+.error-message {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Start section */
+.start-section {
+  text-align: center;
+}
+
+.instructions {
+  background-color: #f8fafc;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.instructions h2 {
+  margin-top: 0;
+  color: #1a1a2e;
+}
+
+.instructions p {
+  margin-bottom: 0;
+  color: #4b5563;
+}
+
+.start-button {
+  background-color: #00843D;
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  width: 100%;
+  max-width: 300px;
+}
+
+.start-button:hover {
+  background-color: #006b32;
+  transform: translateY(-1px);
+}
+
+.start-button:active {
+  transform: translateY(0);
+}
+
+/* Session section */
+.session-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.session-mode-badge {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #00843D;
+  background-color: #f0fdf4;
+  padding: 8px 16px;
+  border-radius: 20px;
+  align-self: center;
+}
+
+/* Status bar */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #fbbf24;
+}
+
+.status-indicator.connected .status-dot {
+  background-color: #22c55e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.session-timer {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Conversation display */
+.conversation-display {
+  min-height: 250px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.message {
+  margin-bottom: 16px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.message:last-child {
+  margin-bottom: 0;
+}
+
+.message.user {
+  background-color: #e0f2fe;
+  margin-left: 40px;
+}
+
+.message.agent {
+  background-color: #f0fdf4;
+  margin-right: 40px;
+}
+
+.message-role {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6b7280;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.message-content {
+  margin: 0;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+/* Text input */
+.text-input-section {
+  display: flex;
+  gap: 8px;
+}
+
+.text-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.text-input:focus {
+  border-color: #00843D;
+}
+
+.send-button {
+  padding: 12px 20px;
+  background-color: #00843D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.send-button:hover:not(:disabled) {
+  background-color: #006b32;
+}
+
+.send-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Session controls */
+.session-controls {
+  display: flex;
+  justify-content: center;
+}
+
+.end-button {
+  padding: 14px 32px;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.end-button:hover {
+  background-color: #b91c1c;
+}
+
+/* Feedback section */
+.feedback-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.feedback-section span {
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.feedback-section button {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.feedback-section button:hover {
+  background-color: #f1f5f9;
+  border-color: #9ca3af;
+}
+
+/* Progress Dashboard spacing */
+.progress-dashboard {
+  margin-bottom: 24px;
+}
+
+/* Scrollbar styling */
+.conversation-display::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversation-display::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.conversation-display::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.conversation-display::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .aussie-practice-container {
+    padding: 16px;
+  }
+
+  .practice-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .message.user {
+    margin-left: 20px;
+  }
+
+  .message.agent {
+    margin-right: 20px;
+  }
+
+  .feedback-section {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,100 @@
+.export-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.export-trigger {
+  padding: 8px 16px;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #4b5563;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-trigger:hover:not(:disabled) {
+  background-color: #e2e8f0;
+}
+
+.export-trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.export-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.export-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  z-index: 100;
+  min-width: 280px;
+  animation: dropdownFade 0.2s ease;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.export-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.export-option:hover {
+  background-color: #f8fafc;
+}
+
+.export-option:not(:last-child) {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.export-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.export-option-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.export-option-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.export-option-desc {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
