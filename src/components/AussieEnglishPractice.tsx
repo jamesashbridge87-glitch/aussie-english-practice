@@ -287,7 +287,7 @@ export function AussieEnglishPractice() {
       <header className="practice-header">
         <div className="header-top">
           <div className="header-brand">
-            <img src="/logo.png" alt="Your Aussie Uncle" className="header-logo" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Your Aussie Uncle" className="header-logo" />
             <h1>SpeakAussie</h1>
           </div>
           <div className="header-actions">
