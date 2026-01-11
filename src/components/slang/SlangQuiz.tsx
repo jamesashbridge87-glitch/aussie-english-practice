@@ -1,7 +1,8 @@
 import { useState, useCallback, useMemo } from 'react';
-import { slangData, categories, categoryNames, SlangCategory, SlangTerm } from '../../data/slangData';
+import { slangData, categories, categoryNames, difficulties, difficultyNames, SlangCategory, SlangDifficulty, SlangTerm } from '../../data/slangData';
 import { useSlangProgress } from '../../hooks/useSlangProgress';
 import { useSoundEffects } from '../../hooks/useSoundEffects';
+import { useGamification } from '../../hooks/useGamification';
 import './SlangQuiz.css';
 
 type QuizDirection = 'term-to-meaning' | 'meaning-to-term';
@@ -53,6 +54,7 @@ function generateQuestions(
 export function SlangQuiz() {
   const [quizState, setQuizState] = useState<QuizState>('start');
   const [selectedCategory, setSelectedCategory] = useState<SlangCategory | 'all'>('all');
+  const [selectedDifficulty, setSelectedDifficulty] = useState<SlangDifficulty | 'all'>('all');
   const [direction, setDirection] = useState<QuizDirection>('term-to-meaning');
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -62,12 +64,18 @@ export function SlangQuiz() {
 
   const { updateQuizScore, progress } = useSlangProgress();
   const { playCorrect, playIncorrect, playSuccess } = useSoundEffects();
+  const { recordQuizComplete, recordQuizCorrect } = useGamification();
 
   const filteredTerms = useMemo(() => {
-    return selectedCategory === 'all'
-      ? slangData
-      : slangData.filter((t) => t.category === selectedCategory);
-  }, [selectedCategory]);
+    let terms = slangData;
+    if (selectedCategory !== 'all') {
+      terms = terms.filter((t) => t.category === selectedCategory);
+    }
+    if (selectedDifficulty !== 'all') {
+      terms = terms.filter((t) => t.difficulty === selectedDifficulty);
+    }
+    return terms;
+  }, [selectedCategory, selectedDifficulty]);
 
   const startQuiz = useCallback(() => {
     const newQuestions = generateQuestions(
@@ -92,6 +100,7 @@ export function SlangQuiz() {
       // Play sound effect
       if (correct) {
         playCorrect();
+        recordQuizCorrect();
       } else {
         playIncorrect();
       }
@@ -100,12 +109,14 @@ export function SlangQuiz() {
       }
       setQuizState('feedback');
     },
-    [questions, currentQuestion, playCorrect, playIncorrect]
+    [questions, currentQuestion, playCorrect, playIncorrect, recordQuizCorrect]
   );
 
   const nextQuestion = useCallback(() => {
     if (currentQuestion + 1 >= questions.length) {
-      updateQuizScore(score + (isCorrect ? 1 : 0));
+      const finalScore = score + (isCorrect ? 0 : 0); // Already added in handleAnswer
+      updateQuizScore(finalScore);
+      recordQuizComplete(finalScore, questions.length);
       playSuccess();
       setQuizState('results');
     } else {
@@ -114,7 +125,7 @@ export function SlangQuiz() {
       setIsCorrect(null);
       setQuizState('playing');
     }
-  }, [currentQuestion, questions.length, score, isCorrect, updateQuizScore, playSuccess]);
+  }, [currentQuestion, questions.length, score, isCorrect, updateQuizScore, recordQuizComplete, playSuccess]);
 
   const getResultMessage = (finalScore: number, total: number) => {
     const percentage = (finalScore / total) * 100;
@@ -146,6 +157,22 @@ export function SlangQuiz() {
                 {categories.map((cat) => (
                   <option key={cat} value={cat}>
                     {categoryNames[cat]}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="option-group">
+              <label>Difficulty</label>
+              <select
+                value={selectedDifficulty}
+                onChange={(e) => setSelectedDifficulty(e.target.value as SlangDifficulty | 'all')}
+                className="quiz-select"
+              >
+                <option value="all">All Levels</option>
+                {difficulties.map((diff) => (
+                  <option key={diff} value={diff}>
+                    {difficultyNames[diff]}
                   </option>
                 ))}
               </select>
