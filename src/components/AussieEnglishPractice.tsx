@@ -286,7 +286,7 @@ export function AussieEnglishPractice() {
     <div className="aussie-practice-container">
       <header className="practice-header">
         <div className="header-top">
-          <h1>Aussie English Practice</h1>
+          <h1>SpeakAussie</h1>
           <div className="header-actions">
             {isAuthenticated ? (
               <UserMenu onShowPlans={() => setShowPlans(true)} />

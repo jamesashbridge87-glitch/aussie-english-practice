@@ -92,7 +92,7 @@ export function exportToJSON(
   };
 
   const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-  downloadBlob(blob, `aussie-english-progress-${Date.now()}.json`);
+  downloadBlob(blob, `speakaussie-progress-${Date.now()}.json`);
 }
 
 export function exportToCSV(
@@ -131,7 +131,7 @@ export function exportToCSV(
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  downloadBlob(blob, `aussie-english-progress-${Date.now()}.csv`);
+  downloadBlob(blob, `speakaussie-progress-${Date.now()}.csv`);
 }
 
 export function exportToPDF(
@@ -147,7 +147,7 @@ export function exportToPDF(
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Aussie English Practice - Progress Report</title>
+  <title>SpeakAussie - Progress Report</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -179,7 +179,7 @@ export function exportToPDF(
 </head>
 <body>
   <div class="header">
-    <h1>Aussie English Practice</h1>
+    <h1>SpeakAussie</h1>
     <p>Progress Report for <strong>${studentName || 'Student'}</strong></p>
     <p style="color: #6b7280;">Generated on ${new Date().toLocaleDateString('en-AU', {
       weekday: 'long',
