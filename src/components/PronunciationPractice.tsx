@@ -48,7 +48,6 @@ export function PronunciationPractice({
   }, []);
 
   const {
-    isListening,
     isSupported,
     transcript,
     confidence,
@@ -350,11 +349,23 @@ function getScoreClass(score: number): string {
   return 'needs-work';
 }
 
-interface PronunciationStatsProps {
-  stats: ReturnType<typeof usePronunciationScoring>['getOverallStats'] extends () => infer R ? R : never;
+export interface PronunciationStats {
+  averageScore: number;
+  totalPhrasesPracticed: number;
+  bestScore: number;
+  recentTrend: number;
+  modeAverages: {
+    everyday: number;
+    slang: number;
+    workplace: number;
+  };
 }
 
-export function PronunciationStats({ stats }: PronunciationStatsProps) {
+interface PronunciationStatsProps {
+  stats: PronunciationStats;
+}
+
+export function PronunciationStatsDisplay({ stats }: PronunciationStatsProps) {
   if (stats.totalPhrasesPracticed === 0) {
     return (
       <div className="pronunciation-stats empty">

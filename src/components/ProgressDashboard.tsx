@@ -1,21 +1,10 @@
 import { useState } from 'react';
 import { ProgressStats, PracticeMode, SessionRecord } from '../hooks/useProgressTracking';
 import { UnlockedAchievement } from '../hooks/useAchievements';
-import { AchievementDisplay, AchievementToast } from './AchievementDisplay';
+import { AchievementDisplay, AchievementToast, AchievementWithProgress } from './AchievementDisplay';
 import { ExportMenu } from './ExportMenu';
-import { PronunciationStats } from './PronunciationPractice';
+import { PronunciationStatsDisplay } from './PronunciationPractice';
 import './ProgressDashboard.css';
-
-interface AchievementWithProgress {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  category: 'streak' | 'sessions' | 'time' | 'modes' | 'special';
-  unlocked: boolean;
-  unlockedAt?: Date;
-  progress?: { current: number; target: number };
-}
 
 interface PronunciationOverallStats {
   averageScore: number;
@@ -228,12 +217,12 @@ export function ProgressDashboard({
 
       {/* Achievements Tab */}
       {activeTab === 'achievements' && achievements && (
-        <AchievementDisplay achievements={achievements} stats={stats} />
+        <AchievementDisplay achievements={achievements} />
       )}
 
       {/* Pronunciation Tab */}
       {activeTab === 'pronunciation' && pronunciationStats && (
-        <PronunciationStats stats={pronunciationStats} />
+        <PronunciationStatsDisplay stats={pronunciationStats} />
       )}
     </div>
   );

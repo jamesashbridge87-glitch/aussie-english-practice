@@ -1,0 +1,90 @@
+.usage-badge {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.usage-badge.low {
+  background: #fef3c7;
+  border-color: #fbbf24;
+}
+
+.usage-badge.exhausted {
+  background: #fee2e2;
+  border-color: #ef4444;
+}
+
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.plan-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #00843D;
+  background: #f0fdf4;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.usage-badge.exhausted .plan-label {
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.usage-text {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.usage-badge.exhausted .usage-text {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.usage-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.usage-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00843D, #22c55e);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.usage-badge.low .usage-fill {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.usage-badge.exhausted .usage-fill {
+  background: linear-gradient(90deg, #dc2626, #ef4444);
+}
+
+.upgrade-hint {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  background: #00843D;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.upgrade-hint:hover {
+  background: #006b32;
+}

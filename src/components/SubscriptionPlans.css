@@ -1,0 +1,195 @@
+.subscription-plans {
+  padding: 24px 0;
+}
+
+.plans-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.plans-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 1.75rem;
+  color: #1a1a2e;
+}
+
+.plans-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.plans-error {
+  background-color: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #dc2626;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.plan-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.plan-card:hover {
+  border-color: #00843D;
+  transform: translateY(-2px);
+}
+
+.plan-card.popular {
+  border-color: #00843D;
+}
+
+.plan-card.current {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #00843D;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.current-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #22c55e;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.plan-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.plan-description {
+  margin: 0 0 16px 0;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.plan-price {
+  margin-bottom: 8px;
+}
+
+.price-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.price-period {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.plan-minutes {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00843D;
+  margin-bottom: 16px;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.plan-features li {
+  padding: 6px 0;
+  padding-left: 24px;
+  position: relative;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.plan-features li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.plan-button {
+  width: 100%;
+  padding: 12px;
+  background: #00843D;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.plan-button:hover:not(:disabled) {
+  background: #006b32;
+}
+
+.plan-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.plan-button.current {
+  background: #22c55e;
+}
+
+.manage-subscription {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.manage-btn {
+  padding: 10px 24px;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: #4b5563;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.manage-btn:hover {
+  background: #f8fafc;
+  border-color: #9ca3af;
+}
+
+@media (max-width: 640px) {
+  .plans-grid {
+    grid-template-columns: 1fr;
+  }
+}

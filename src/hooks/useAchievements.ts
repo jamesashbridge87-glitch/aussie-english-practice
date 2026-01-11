@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ProgressStats, PracticeMode } from './useProgressTracking';
+import { ProgressStats } from './useProgressTracking';
 
 export interface Achievement {
   id: string;

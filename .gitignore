@@ -35,3 +35,7 @@ coverage/
 
 # Vite
 *.local
+
+# Backend data
+backend/data/
+*.db

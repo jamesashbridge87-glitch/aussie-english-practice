@@ -1,8 +1,12 @@
 import { Achievement } from '../hooks/useAchievements';
-import { ProgressStats } from '../hooks/useProgressTracking';
 import './AchievementDisplay.css';
 
-interface AchievementWithProgress extends Achievement {
+export interface AchievementWithProgress {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  category: 'streak' | 'sessions' | 'time' | 'modes' | 'special';
   unlocked: boolean;
   unlockedAt?: Date;
   progress?: { current: number; target: number };
@@ -10,7 +14,6 @@ interface AchievementWithProgress extends Achievement {
 
 interface AchievementDisplayProps {
   achievements: AchievementWithProgress[];
-  stats: ProgressStats;
 }
 
 interface AchievementToastProps {

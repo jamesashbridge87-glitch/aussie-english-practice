@@ -1,10 +1,46 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 
+// Web Speech API types
+interface SpeechRecognitionType {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  maxAlternatives: number;
+  onresult: ((event: SpeechRecognitionEventType) => void) | null;
+  onerror: ((event: SpeechRecognitionErrorEventType) => void) | null;
+  onend: (() => void) | null;
+  start: () => void;
+  stop: () => void;
+  abort: () => void;
+}
+
+interface SpeechRecognitionEventType {
+  resultIndex: number;
+  results: SpeechRecognitionResultList;
+}
+
+interface SpeechRecognitionErrorEventType {
+  error: string;
+}
+
+interface SpeechRecognitionResultList {
+  length: number;
+  [index: number]: SpeechRecognitionResultItem;
+}
+
+interface SpeechRecognitionResultItem {
+  isFinal: boolean;
+  [index: number]: {
+    transcript: string;
+    confidence: number;
+  };
+}
+
 // Extend Window interface for Web Speech API
 declare global {
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
+    SpeechRecognition: new () => SpeechRecognitionType;
+    webkitSpeechRecognition: new () => SpeechRecognitionType;
   }
 }
 
@@ -39,7 +75,7 @@ export function useSpeechRecognition(options: UseSpeechRecognitionOptions = {}) 
   const [confidence, setConfidence] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionType | null>(null);
 
   // Initialize speech recognition
   useEffect(() => {
@@ -57,7 +93,7 @@ export function useSpeechRecognition(options: UseSpeechRecognitionOptions = {}) 
     recognition.interimResults = interimResults;
     recognition.maxAlternatives = 1;
 
-    recognition.onresult = (event: SpeechRecognitionEvent) => {
+    recognition.onresult = (event: SpeechRecognitionEventType) => {
       let finalTranscript = '';
       let interimTranscript = '';
       let bestConfidence = 0;
@@ -88,7 +124,7 @@ export function useSpeechRecognition(options: UseSpeechRecognitionOptions = {}) 
       }
     };
 
-    recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+    recognition.onerror = (event: SpeechRecognitionErrorEventType) => {
       let errorMessage = 'Speech recognition error';
 
       switch (event.error) {
