@@ -344,20 +344,20 @@ export function AussieEnglishPractice() {
             </button>
             <div className="signup-prompt-content">
               <h2>Great practice session!</h2>
-              <p>Sign up to save your progress and get more practice time each day.</p>
+              <p>Want more practice time? Subscribe to get up to 15 minutes per day!</p>
               <div className="signup-prompt-benefits">
+                <div className="benefit-item">Up to 15 minutes daily practice</div>
                 <div className="benefit-item">Track your learning progress</div>
                 <div className="benefit-item">Unlock achievements</div>
-                <div className="benefit-item">Get more daily practice time</div>
               </div>
               <button
                 className="signup-prompt-btn primary"
                 onClick={() => {
                   setShowSignupPrompt(false);
-                  setShowAuthModal(true);
+                  setShowPlans(true);
                 }}
               >
-                Sign Up Free
+                View Plans
               </button>
               <button
                 className="signup-prompt-btn secondary"
