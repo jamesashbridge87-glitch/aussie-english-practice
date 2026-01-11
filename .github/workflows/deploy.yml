@@ -35,8 +35,54 @@ jobs:
         env:
           VITE_API_URL: https://aussie-english-practice-production.up.railway.app/api
 
-      - name: Add CNAME for custom domain
-        run: echo "youraussieuncle.com" > ./dist/CNAME
+      - name: Prepare deployment structure
+        run: |
+          # Create the final deployment directory
+          mkdir -p ./deploy/app
+          # Move built files to /app subdirectory
+          mv ./dist/* ./deploy/app/
+          # Add CNAME at root level
+          echo "youraussieuncle.com" > ./deploy/CNAME
+          # Create a simple landing page at root that redirects to /app
+          cat > ./deploy/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Your Aussie Uncle</title>
+            <meta http-equiv="refresh" content="0;url=/app/">
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+                background: linear-gradient(135deg, #00843D 0%, #006B32 100%);
+                color: white;
+              }
+              .container {
+                text-align: center;
+                padding: 2rem;
+              }
+              a {
+                color: white;
+                text-decoration: underline;
+              }
+            </style>
+          </head>
+          <body>
+            <div class="container">
+              <h1>Your Aussie Uncle</h1>
+              <p>Redirecting to <a href="/app/">SpeakAussie</a>...</p>
+            </div>
+          </body>
+          </html>
+          EOF
+          # Add .nojekyll to prevent Jekyll processing
+          touch ./deploy/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -44,7 +90,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "./dist"
+          path: "./deploy"
 
   deploy:
     environment:
