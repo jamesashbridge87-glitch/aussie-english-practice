@@ -8,8 +8,8 @@ interface SubscriptionPlansProps {
 }
 
 export function SubscriptionPlans({ onAuthRequired }: SubscriptionPlansProps) {
-  const { isAuthenticated, user } = useAuth();
-  const { plans, usage, startCheckout, openBillingPortal } = useSubscription();
+  const { isAuthenticated } = useAuth();
+  const { usage, startCheckout, openBillingPortal } = useSubscription();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
