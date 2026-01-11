@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3';
+import Database, { Database as DatabaseType } from 'better-sqlite3';
 import { schema } from './schema.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,7 +15,7 @@ if (!fs.existsSync(dataDir)) {
   fs.mkdirSync(dataDir, { recursive: true });
 }
 
-export const db = new Database(dbPath);
+export const db: DatabaseType = new Database(dbPath);
 
 // Enable foreign keys
 db.pragma('foreign_keys = ON');

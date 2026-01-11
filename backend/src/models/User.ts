@@ -41,7 +41,11 @@ export const UserModel = {
 
     stmt.run(id, input.email.toLowerCase(), password_hash, input.name || null);
 
-    return this.findById(id) as Promise<User>;
+    const user = this.findById(id);
+    if (!user) {
+      throw new Error('Failed to create user');
+    }
+    return user;
   },
 
   findById(id: string): User | undefined {
