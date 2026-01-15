@@ -1,12 +1,12 @@
-import { useConversation } from '@elevenlabs/react';
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useProgressTracking, PracticeMode } from '../hooks/useProgressTracking';
+import { useFishAudioConversation, PracticeMode } from '../hooks/useFishAudioConversation';
+import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
 import { useAuth } from '../hooks/useAuth';
 import { useSubscription } from '../hooks/useSubscription';
 import { useAnonymousUsage } from '../hooks/useAnonymousUsage';
-import { PracticeModeSelector, modePrompts } from './PracticeModeSelector';
+import { PracticeModeSelector } from './PracticeModeSelector';
 import { ProgressDashboard } from './ProgressDashboard';
 import { AudioVisualizer } from './AudioVisualizer';
 import { AuthModal } from './AuthModal';
@@ -21,12 +21,6 @@ interface Message {
   content: string;
   timestamp: Date;
 }
-
-const modeFirstMessages: Record<PracticeMode, string> = {
-  everyday: "G'day! Ready to practice some everyday Aussie English? What would you like to chat about today?",
-  slang: "G'day mate! Ready to learn some fair dinkum Aussie slang? No worries, I'll help you sound like a true blue Aussie in no time!",
-  workplace: "Good morning! Ready to practice professional Australian English for the workplace? Let's make sure you're prepared for your Aussie work environment.",
-};
 
 export function AussieEnglishPractice() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -82,13 +76,13 @@ export function AussieEnglishPractice() {
     clearPronunciationData,
   } = usePronunciationScoring();
 
-  const conversation = useConversation({
+  const conversation = useFishAudioConversation({
     onConnect: () => {
-      console.log('Connected to Aussie English Practice Agent');
+      console.log('Connected to Fish Audio Conversation');
       setError(null);
     },
     onDisconnect: () => {
-      console.log('Disconnected from agent');
+      console.log('Disconnected from conversation');
       setIsSessionActive(false);
     },
     onMessage: (message) => {
@@ -111,7 +105,16 @@ export function AussieEnglishPractice() {
     },
   });
 
-  const { status, isSpeaking, getInputByteFrequencyData, getOutputByteFrequencyData } = conversation;
+  const {
+    status,
+    isSpeaking,
+    isListening,
+    isProcessing,
+    getInputByteFrequencyData,
+    getOutputByteFrequencyData,
+    startRecording,
+    stopRecording,
+  } = conversation;
 
   // Check achievements when stats change
   const stats = getStats();
@@ -166,15 +169,7 @@ export function AussieEnglishPractice() {
       }
 
       await conversation.startSession({
-        agentId: 'g50Lc7IzLlbPiRpgNXQJ',
-        overrides: {
-          agent: {
-            prompt: {
-              prompt: modePrompts[selectedMode],
-            },
-            firstMessage: modeFirstMessages[selectedMode],
-          },
-        },
+        mode: selectedMode,
       });
 
       startTracking(selectedMode);
@@ -413,7 +408,7 @@ export function AussieEnglishPractice() {
           <div className="conversation-display">
             {messages.length === 0 ? (
               <div className="empty-state">
-                Start speaking to begin the conversation...
+                Hold the microphone button and speak to begin the conversation...
               </div>
             ) : (
               messages.map((msg, index) => (
@@ -424,6 +419,32 @@ export function AussieEnglishPractice() {
                   <p className="message-content">{msg.content}</p>
                 </div>
               ))
+            )}
+          </div>
+
+          {/* Push-to-talk button */}
+          <div className="voice-input-section">
+            <button
+              className={`push-to-talk-btn ${isListening ? 'recording' : ''} ${isProcessing ? 'processing' : ''}`}
+              onMouseDown={() => !isProcessing && !isSpeaking && startRecording()}
+              onMouseUp={() => isListening && stopRecording()}
+              onMouseLeave={() => isListening && stopRecording()}
+              onTouchStart={() => !isProcessing && !isSpeaking && startRecording()}
+              onTouchEnd={() => isListening && stopRecording()}
+              disabled={isProcessing || isSpeaking}
+            >
+              {isProcessing ? (
+                <span>Processing...</span>
+              ) : isListening ? (
+                <span>Release to Send</span>
+              ) : isSpeaking ? (
+                <span>Listening to Teacher...</span>
+              ) : (
+                <span>Hold to Speak</span>
+              )}
+            </button>
+            {isListening && (
+              <div className="recording-indicator">Recording...</div>
             )}
           </div>
 

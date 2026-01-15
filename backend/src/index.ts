@@ -10,6 +10,7 @@ import authRoutes from './routes/auth.js';
 import subscriptionRoutes from './routes/subscriptions.js';
 import sessionRoutes from './routes/sessions.js';
 import billingRoutes from './routes/billing.js';
+import voiceRoutes from './routes/voice.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -50,6 +51,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/billing', billingRoutes);
+app.use('/api/voice', voiceRoutes);
 
 // 404 handler
 app.use((_req, res) => {
