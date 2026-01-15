@@ -64,10 +64,17 @@ class FishAudioService {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error('Fish Audio ASR error:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+        url: `${FISH_AUDIO_BASE_URL}/v1/asr`,
+      });
       throw new Error(`Fish Audio ASR failed: ${response.status} - ${errorText}`);
     }
 
     const result = await response.json();
+    console.log('Fish Audio ASR result:', result);
     return {
       text: result.text || '',
       duration: result.duration,
@@ -105,9 +112,17 @@ class FishAudioService {
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error('Fish Audio TTS error:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText,
+        url: `${FISH_AUDIO_BASE_URL}/v1/tts`,
+        voiceId,
+      });
       throw new Error(`Fish Audio TTS failed: ${response.status} - ${errorText}`);
     }
 
+    console.log('Fish Audio TTS success for voice:', voiceId);
     const arrayBuffer = await response.arrayBuffer();
     return Buffer.from(arrayBuffer);
   }
