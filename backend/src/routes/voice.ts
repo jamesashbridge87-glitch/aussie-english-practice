@@ -1,5 +1,5 @@
 import { Router, Response, Request } from 'express';
-import { authenticate, AuthenticatedRequest } from '../middleware/auth.js';
+import { optionalAuth, AuthenticatedRequest } from '../middleware/auth.js';
 import { fishAudioService, EmotionType } from '../services/fishAudioService.js';
 import { conversationService, PracticeMode } from '../services/conversationService.js';
 import { z } from 'zod';
@@ -47,7 +47,7 @@ router.get('/status', (_req: Request, res: Response) => {
 });
 
 // POST /voice/transcribe - Transcribe audio using Fish Audio ASR
-router.post('/transcribe', authenticate, upload.single('audio'), async (req: AuthenticatedRequest, res: Response) => {
+router.post('/transcribe', optionalAuth, upload.single('audio'), async (req: AuthenticatedRequest, res: Response) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: 'No audio file provided' });
@@ -78,7 +78,7 @@ router.post('/transcribe', authenticate, upload.single('audio'), async (req: Aut
 });
 
 // POST /voice/tts - Convert text to speech using Fish Audio TTS
-router.post('/tts', authenticate, async (req: AuthenticatedRequest, res: Response) => {
+router.post('/tts', optionalAuth, async (req: AuthenticatedRequest, res: Response) => {
   try {
     const validation = ttsSchema.safeParse(req.body);
     if (!validation.success) {
@@ -120,7 +120,7 @@ router.post('/tts', authenticate, async (req: AuthenticatedRequest, res: Respons
 });
 
 // POST /voice/conversation/start - Start a new conversation
-router.post('/conversation/start', authenticate, (req: AuthenticatedRequest, res: Response) => {
+router.post('/conversation/start', optionalAuth, (req: AuthenticatedRequest, res: Response) => {
   try {
     const validation = startConversationSchema.safeParse(req.body);
     if (!validation.success) {
@@ -146,7 +146,7 @@ router.post('/conversation/start', authenticate, (req: AuthenticatedRequest, res
 });
 
 // POST /voice/conversation - Handle a conversation turn (user speaks, AI responds)
-router.post('/conversation', authenticate, async (req: AuthenticatedRequest, res: Response) => {
+router.post('/conversation', optionalAuth, async (req: AuthenticatedRequest, res: Response) => {
   try {
     const validation = conversationSchema.safeParse(req.body);
     if (!validation.success) {
@@ -178,7 +178,7 @@ router.post('/conversation', authenticate, async (req: AuthenticatedRequest, res
 
 // POST /voice/conversation/audio - Full conversation turn with audio I/O
 // Accepts user audio, returns AI audio response
-router.post('/conversation/audio', authenticate, upload.single('audio'), async (req: AuthenticatedRequest, res: Response) => {
+router.post('/conversation/audio', optionalAuth, upload.single('audio'), async (req: AuthenticatedRequest, res: Response) => {
   try {
     if (!req.file) {
       res.status(400).json({ error: 'No audio file provided' });
@@ -231,7 +231,7 @@ router.post('/conversation/audio', authenticate, upload.single('audio'), async (
 });
 
 // POST /voice/conversation/end - End a conversation and clear history
-router.post('/conversation/end', authenticate, (req: AuthenticatedRequest, res: Response) => {
+router.post('/conversation/end', optionalAuth, (req: AuthenticatedRequest, res: Response) => {
   try {
     const { sessionId } = req.body;
     if (!sessionId) {
