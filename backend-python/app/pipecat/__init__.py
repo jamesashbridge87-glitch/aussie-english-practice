@@ -1,0 +1,1 @@
+# Pipecat voice agent configuration

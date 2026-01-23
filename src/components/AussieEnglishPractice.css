@@ -672,6 +672,58 @@
   50% { opacity: 0.5; }
 }
 
+/* Real-time voice indicators */
+.real-time-indicator {
+  text-align: center;
+  padding: 12px 24px;
+  background: var(--color-gray-50);
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.speaking-indicator {
+  color: var(--color-primary-dark);
+}
+
+.listening-indicator {
+  color: var(--color-success);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.ready-indicator {
+  color: var(--color-gray-600);
+}
+
+/* Mute button */
+.mute-btn {
+  padding: 14px 32px;
+  border: 2px solid var(--color-gray-300);
+  border-radius: 30px;
+  background: var(--color-light);
+  color: var(--color-dark);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mute-btn:hover {
+  border-color: var(--color-primary);
+  background: var(--color-gray-50);
+}
+
+.mute-btn.muted {
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: white;
+}
+
+.mute-btn.muted:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .aussie-practice-container {

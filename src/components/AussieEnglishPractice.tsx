@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import { useFishAudioConversation, PracticeMode } from '../hooks/useFishAudioConversation';
+import { useDailyConversation, PracticeMode } from '../hooks/useDailyConversation';
 import { useProgressTracking } from '../hooks/useProgressTracking';
 import { useAchievements } from '../hooks/useAchievements';
 import { usePronunciationScoring } from '../hooks/usePronunciationScoring';
@@ -76,9 +76,9 @@ export function AussieEnglishPractice() {
     clearPronunciationData,
   } = usePronunciationScoring();
 
-  const conversation = useFishAudioConversation({
+  const conversation = useDailyConversation({
     onConnect: () => {
-      console.log('Connected to Fish Audio Conversation');
+      console.log('Connected to Daily voice room');
       setError(null);
     },
     onDisconnect: () => {
@@ -109,11 +109,10 @@ export function AussieEnglishPractice() {
     status,
     isSpeaking,
     isListening,
-    isProcessing,
+    isMuted,
     getInputByteFrequencyData,
     getOutputByteFrequencyData,
-    startRecording,
-    stopRecording,
+    toggleMute,
   } = conversation;
 
   // Check achievements when stats change
@@ -408,7 +407,7 @@ export function AussieEnglishPractice() {
           <div className="conversation-display">
             {messages.length === 0 ? (
               <div className="empty-state">
-                Hold the microphone button and speak to begin the conversation...
+                Just start speaking - Your Aussie Uncle is listening!
               </div>
             ) : (
               messages.map((msg, index) => (
@@ -422,48 +421,22 @@ export function AussieEnglishPractice() {
             )}
           </div>
 
-          {/* Push-to-talk button */}
+          {/* Voice controls - Real-time mode with automatic turn-taking */}
           <div className="voice-input-section">
-            <button
-              className={`push-to-talk-btn ${isListening ? 'recording' : ''} ${isProcessing ? 'processing' : ''}`}
-              onMouseDown={() => !isProcessing && !isSpeaking && startRecording()}
-              onMouseUp={() => isListening && stopRecording()}
-              onMouseLeave={() => isListening && stopRecording()}
-              onTouchStart={() => !isProcessing && !isSpeaking && startRecording()}
-              onTouchEnd={() => isListening && stopRecording()}
-              disabled={isProcessing || isSpeaking}
-            >
-              {isProcessing ? (
-                <span>Processing...</span>
+            <div className="real-time-indicator">
+              {isSpeaking ? (
+                <span className="speaking-indicator">Your Aussie Uncle is speaking...</span>
               ) : isListening ? (
-                <span>Release to Send</span>
-              ) : isSpeaking ? (
-                <span>Listening to Teacher...</span>
+                <span className="listening-indicator">Listening to you...</span>
               ) : (
-                <span>Hold to Speak</span>
+                <span className="ready-indicator">Ready - just start talking!</span>
               )}
-            </button>
-            {isListening && (
-              <div className="recording-indicator">Recording...</div>
-            )}
-          </div>
-
-          {/* Text input option */}
-          <div className="text-input-section">
-            <input
-              type="text"
-              value={textInput}
-              onChange={handleInputChange}
-              onKeyPress={handleKeyPress}
-              placeholder="Or type your message here..."
-              className="text-input"
-            />
+            </div>
             <button
-              onClick={handleSendText}
-              className="send-button"
-              disabled={!textInput.trim()}
+              className={`mute-btn ${isMuted ? 'muted' : ''}`}
+              onClick={toggleMute}
             >
-              Send
+              {isMuted ? 'Unmute' : 'Mute'}
             </button>
           </div>
 
