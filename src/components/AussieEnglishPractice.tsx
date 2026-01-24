@@ -26,7 +26,6 @@ export function AussieEnglishPractice() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [textInput, setTextInput] = useState('');
   const [selectedMode, setSelectedMode] = useState<PracticeMode>('everyday');
   const [showProgress, setShowProgress] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
@@ -221,27 +220,6 @@ export function AussieEnglishPractice() {
     // Auto-end session when time runs out
     endSession();
   }, []);
-
-  const handleSendText = () => {
-    if (textInput.trim()) {
-      conversation.sendUserMessage(textInput);
-      setTextInput('');
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendText();
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextInput(e.target.value);
-    if (isSessionActive) {
-      conversation.sendUserActivity();
-    }
-  };
 
   const getInputFrequencyData = useCallback((): Uint8Array | null => {
     try {
