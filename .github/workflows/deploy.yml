@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_API_URL: https://aussie-english-practice-production-ef99.up.railway.app
+          VITE_API_URL: https://aussie-english-practice-production.up.railway.app
 
       - name: Prepare deployment structure
         run: |

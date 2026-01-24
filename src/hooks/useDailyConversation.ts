@@ -30,7 +30,7 @@ function getApiBaseUrl(): string {
   const hostname = window.location.hostname;
 
   if (hostname === 'youraussieuncle.io' || hostname === 'www.youraussieuncle.io') {
-    return 'https://aussie-english-practice-production-ef99.up.railway.app';
+    return 'https://aussie-english-practice-production.up.railway.app';
   }
 
   return 'http://localhost:3001';

@@ -13,18 +13,15 @@ from loguru import logger
 
 from pipecat.audio.vad.silero import SileroVADAnalyzer
 from pipecat.audio.vad.vad_analyzer import VADParams
-from pipecat.processors.turn_detector.smart_turn import SmartTurnAnalyzer
-from pipecat.frames.frames import LLMRunFrame
+from pipecat.frames.frames import LLMMessagesFrame, EndFrame
 from pipecat.pipeline.pipeline import Pipeline
 from pipecat.pipeline.runner import PipelineRunner
 from pipecat.pipeline.task import PipelineParams, PipelineTask
-from pipecat.processors.aggregators.llm_context import LLMContext
-from pipecat.processors.aggregators.llm_response_universal import LLMContextAggregatorPair
-from pipecat.services.anthropic.llm import AnthropicLLMService
-from pipecat.services.deepgram.stt import DeepgramSTTService
-from pipecat.services.fish.tts import FishAudioTTSService
-from pipecat.transports.base_transport import BaseTransport, TransportParams
-from pipecat.transports.daily.transport import DailyParams, DailyTransport
+from pipecat.processors.aggregators.openai_llm_context import OpenAILLMContext
+from pipecat.services.anthropic import AnthropicLLMService
+from pipecat.services.deepgram import DeepgramSTTService
+from pipecat.services.fish import FishAudioTTSService
+from pipecat.transports.services.daily import DailyParams, DailyTransport
 
 from app.config import settings
 
@@ -70,7 +67,7 @@ MODE_FIRST_MESSAGES = {
 
 
 async def create_bot(
-    transport: BaseTransport,
+    transport: DailyTransport,
     mode: str = "everyday",
 ) -> PipelineTask:
     """Create the Pipecat pipeline for voice conversation."""
@@ -80,19 +77,11 @@ async def create_bot(
     # Initialize services
     stt = DeepgramSTTService(
         api_key=settings.deepgram_api_key,
-        model="nova-2",
-    )
-
-    # Smart Turn analyzer for better turn-taking detection
-    # Uses semantic understanding to know when user finished their thought
-    smart_turn = SmartTurnAnalyzer(
-        model_path="pipecat-ai/smart-turn-v3",  # Auto-downloads from HuggingFace
-        min_volume=0.5,
     )
 
     tts = FishAudioTTSService(
         api_key=settings.fish_api_key,
-        model=settings.fish_voice_id,
+        voice_id=settings.fish_voice_id,
     )
 
     llm = AnthropicLLMService(
@@ -118,44 +107,40 @@ Additional guidelines:
         },
     ]
 
-    context = LLMContext(messages)
-    user_aggregator, assistant_aggregator = LLMContextAggregatorPair(context)
+    context = OpenAILLMContext(messages)
+    context_aggregator = llm.create_context_aggregator(context)
 
     # Build pipeline
-    # Smart Turn sits after STT to analyze transcribed text for end-of-turn
     pipeline = Pipeline(
         [
             transport.input(),
             stt,
-            smart_turn,
-            user_aggregator,
+            context_aggregator.user(),
             llm,
             tts,
             transport.output(),
-            assistant_aggregator,
+            context_aggregator.assistant(),
         ]
     )
 
     task = PipelineTask(
         pipeline,
         params=PipelineParams(
-            enable_metrics=True,
-            enable_usage_metrics=True,
+            allow_interruptions=True,
         ),
     )
 
     # Event handlers
-    @transport.event_handler("on_client_connected")
-    async def on_client_connected(transport, client):
-        logger.info(f"Client connected")
+    @transport.event_handler("on_first_participant_joined")
+    async def on_first_participant_joined(transport, participant):
+        logger.info(f"Participant joined: {participant['id']}")
         # Start with greeting
-        messages.append({"role": "assistant", "content": first_message})
-        await task.queue_frames([LLMRunFrame()])
+        await task.queue_frames([LLMMessagesFrame(messages)])
 
-    @transport.event_handler("on_client_disconnected")
-    async def on_client_disconnected(transport, client):
-        logger.info(f"Client disconnected")
-        await task.cancel()
+    @transport.event_handler("on_participant_left")
+    async def on_participant_left(transport, participant, reason):
+        logger.info(f"Participant left: {participant['id']}")
+        await task.queue_frame(EndFrame())
 
     return task
 
@@ -164,13 +149,15 @@ async def run_bot(room_url: str, token: str, mode: str = "everyday"):
     """Run the voice bot in a Daily room."""
 
     transport = DailyTransport(
-        room_url=room_url,
-        token=token,
-        bot_name="Your Aussie Uncle",
-        params=DailyParams(
+        room_url,
+        token,
+        "Your Aussie Uncle",
+        DailyParams(
             audio_in_enabled=True,
             audio_out_enabled=True,
-            vad_analyzer=SileroVADAnalyzer(params=VADParams(stop_secs=0.3)),
+            vad_enabled=True,
+            vad_analyzer=SileroVADAnalyzer(params=VADParams(stop_secs=0.5)),
+            transcription_enabled=False,  # We use Deepgram STT instead
         ),
     )
 
