@@ -1,125 +1,163 @@
-# Australian Workplace Vocabulary Guide
+# Australian Workplace Communication Guide
 
-## Common Workplace Slang & Expressions
+## Professional Greetings
 
-### Greetings & Small Talk
-- **G'day** - Hello/Good day (universal Australian greeting)
-- **How ya going?** - How are you? (standard greeting, doesn't require detailed answer)
-- **Not bad** - Good/Fine (common response to "how are you")
-- **Yeah, nah** - No (softened refusal)
-- **Nah, yeah** - Yes (casual agreement)
-- **Heaps good** - Very good/excellent
-- **Sweet as** - Great/Perfect/No problem
-- **No worries** - You're welcome / It's okay / No problem
-- **She'll be right** - It will be fine / Don't worry about it
-- **Too easy** - No problem / Can do
+### Common Greetings
+- **"Hi, how are you?"** - Standard greeting
+- **"How's it going?"** - Slightly more casual, still professional
+- **"Good morning/afternoon"** - Formal settings
+- **"G'day"** - Acceptable but not required, more common in trades
 
-### Work-Related Terms
-- **Arvo** - Afternoon ("See you this arvo")
-- **Smoko** - Coffee/smoke break ("Going on smoko")
-- **Knock off** - Finish work ("What time do you knock off?")
-- **Sickie** - Sick day, sometimes used loosely ("chucking a sickie")
-- **RDO** - Rostered Day Off (common in trades/construction)
-- **Brekkie** - Breakfast ("Let's grab brekkie before the meeting")
-- **Cuppa** - Cup of tea or coffee
-- **Servo** - Service station/gas station
-- **Bottle-o** - Liquor store/bottle shop
+### Standard Responses
+- **"Good thanks, yourself?"** - Polite response
+- **"Not bad, thanks"** - Common, slightly casual
+- **"Yeah, good thanks"** - Casual but acceptable
 
-### Describing People & Situations
-- **Bloke** - Man/guy
-- **Mate** - Friend (can be used for strangers too)
-- **Legend** - Great person ("Thanks mate, you're a legend")
-- **Good on ya** - Well done / Good for you
-- **Fair dinkum** - Genuine/honest/true
-- **Ripper** - Excellent ("That's a ripper idea")
-- **Stoked** - Very happy/pleased
-- **Flat out** - Very busy ("Sorry, been flat out today")
-- **Full-on** - Intense/busy/overwhelming
-- **Dodgy** - Suspicious/unreliable/of poor quality
+## Workplace Phrases
 
-### Agreement & Disagreement
-- **Spot on** - Exactly right
-- **Bang on** - Precisely correct
-- **On the money** - Correct/accurate
-- **Reckon** - Think/believe ("I reckon that's a good idea")
-- **Fair enough** - That's reasonable / I accept that
-- **No dramas** - No problem
-- **All good** - It's okay / No problem
+### Agreement & Acknowledgment
+- **"Sounds good"** - I agree / That works
+- **"No worries"** - You're welcome / That's fine
+- **"All good"** - It's okay / No problem
+- **"Fair enough"** - I accept that / That's reasonable
+- **"Makes sense"** - I understand
+- **"Spot on"** - Exactly right
 
-### Negative Expressions
-- **Stuffed** - Tired / Broken / In trouble
-- **Knackered** - Exhausted
-- **Dodgy** - Questionable quality or reliability
-- **Suss** - Suspicious (also means to figure out: "suss it out")
-- **Having a whinge** - Complaining
-- **Chuck a wobbly** - Get angry/have a tantrum
+### Expressing Opinions
+- **"I think..."** - Standard opinion
+- **"I reckon..."** - Slightly more casual, common in Australia
+- **"From my perspective..."** - More formal
+- **"In my experience..."** - Professional framing
 
-## Interview-Specific Vocabulary
+### Asking for Clarification
+- **"Sorry, could you run that by me again?"** - Please repeat
+- **"Just to clarify..."** - Making sure I understand
+- **"Do you mean...?"** - Checking understanding
+- **"Can you elaborate on that?"** - Need more detail
 
-### Talking About Experience
-- "I've been in the game for..." - I've worked in this field for...
-- "I cut my teeth at..." - I learned/started my career at...
-- "I've worn a few hats" - I've had various roles
-- "Mucked in" - Helped out / Got involved
+### Offering Help
+- **"Can I help with anything?"** - General offer
+- **"Let me know if you need a hand"** - Casual offer
+- **"Happy to help"** - Positive response
+- **"I can take care of that"** - Taking ownership
 
-### Describing Work Style
-- "I'm a team player" - Works well with others
-- "Hands-on" - Directly involved in the work
-- "Results-driven" - Focused on outcomes
-- "Self-starter" - Works independently without supervision
-- "Hit the ground running" - Start being productive immediately
+## Meeting Language
 
-### Common Interview Phrases
-- "What does a typical day look like?" - Asking about daily responsibilities
-- "What's the team culture like?" - Asking about workplace environment
-- "Is there room to grow?" - Asking about career progression
-- "When do you need someone to start?" - Asking about start date
+### Starting Meetings
+- "Thanks everyone for joining"
+- "Should we get started?"
+- "Let's kick things off"
+- "Thanks for making the time"
 
-## Workplace Scenarios Vocabulary
+### Contributing Ideas
+- "I'd like to suggest..."
+- "What if we tried..."
+- "One option could be..."
+- "Building on that idea..."
 
-### Meetings
-- **Catch up** - Informal meeting ("Let's have a quick catch up")
-- **Touch base** - Brief check-in
-- **Circle back** - Return to discuss later
-- **Take it offline** - Discuss separately/privately
-- **Run it up the flagpole** - Present idea to management
+### Seeking Input
+- "What does everyone think?"
+- "Any thoughts on this?"
+- "I'd value your input"
+- "Does anyone have concerns?"
 
-### Email & Communication
-- "Just following up on..." - Politely chasing a response
-- "Keen to hear your thoughts" - Would like your opinion
-- "Give us a bell" - Call me
-- "Drop me a line" - Send me a message
-- "Cheers" - Thanks (common email sign-off)
+### Managing Discussion
+- "Let's come back to that"
+- "Can we park that for now?"
+- "Good point, let's explore that"
+- "We might be getting off track"
 
-### Asking for Help
-- "Could you give me a hand with...?" - Can you help me?
-- "Do you have a sec?" - Do you have a moment?
-- "Mind if I pick your brain?" - Can I ask your advice?
-- "I'm a bit stuck on..." - I need help with...
+### Closing Meetings
+- "Let's wrap up there"
+- "To summarise the key points..."
+- "I'll send through the action items"
+- "Thanks everyone"
 
-### Socialising at Work
-- "Friday drinks" / "Friday arvos" - End of week social drinks
-- "Shouting" - Buying a round ("I'll shout the next round")
-- "Skull" - Drink quickly
-- "BYO" - Bring your own (food/drinks)
-- "Barbie" - Barbecue
+## Email Communication
 
-## Pronunciation Notes
+### Opening Lines
+- "Hi [Name]," - Standard
+- "Good morning/afternoon," - More formal
+- "Hope you're well" - Friendly opener
+- "Thanks for your email" - Acknowledging their message
 
-### Common Patterns
-- Australians often shorten words and add "-ie" or "-o":
-  - Breakfast → Brekkie
-  - Afternoon → Arvo
-  - Service station → Servo
-  - Ambulance → Ambo
-  - Electrician → Sparky
+### Common Phrases
+- "Just following up on..." - Politely chasing
+- "As discussed..." - Referencing conversation
+- "Please find attached..." - Sending documents
+- "Let me know if you have questions" - Offering help
+- "Happy to discuss further" - Open to conversation
 
-- Rising intonation at end of statements (sounds like questions)
-- Dropping 'g' from -ing endings ("goin'", "workin'")
-- "Yeah" as filler word
+### Closing Lines
+- "Thanks," or "Cheers," - Common sign-offs
+- "Kind regards," - More formal
+- "Best," - Brief but professional
+- "Speak soon," - If follow-up expected
 
-### Words That Sound Different
-- "Data" - pronounced "dah-ta" not "day-ta"
-- "Schedule" - often "shed-yool"
-- "Aluminium" - "al-yoo-MIN-ee-um" (extra syllable)
-- "H" - pronounced "haych" not "aych"
+## Interview Language
+
+### Describing Experience
+- "In my previous role, I..."
+- "I've worked in [field] for X years"
+- "My background is in..."
+- "I was responsible for..."
+
+### Discussing Achievements
+- "I contributed to..."
+- "I helped the team achieve..."
+- "One project I'm proud of..."
+- "We were able to improve..."
+
+### Showing Interest
+- "I'm really interested in..."
+- "What attracted me to this role..."
+- "I'm keen to learn more about..."
+- "This aligns with my goal to..."
+
+### Handling Difficult Questions
+- "That's a good question"
+- "To be honest..."
+- "I haven't encountered that specifically, but..."
+- "Let me think about that for a moment"
+
+### Asking Questions
+- "What does a typical day look like?"
+- "How would you describe the team culture?"
+- "What are the main priorities for this role?"
+- "Is there opportunity for development?"
+
+## Feedback & Performance
+
+### Giving Feedback
+- "Can I share some feedback?"
+- "I noticed that..."
+- "One thing that could help..."
+- "You did well with..."
+
+### Receiving Feedback
+- "Thanks for the feedback"
+- "That's helpful to know"
+- "I'll work on that"
+- "Could you give me an example?"
+
+### Discussing Progress
+- "Things are on track"
+- "We're making good progress"
+- "There's been a slight delay"
+- "I'll keep you updated"
+
+## Cultural Notes
+
+### Australian Communication Style
+- Direct but friendly
+- Less formal than many cultures
+- Humour is common, even at work
+- First names used at all levels
+- "Mate" occasionally used but not required
+
+### Things to Know
+- Australians value honesty over excessive politeness
+- Being overly formal can seem distant
+- Self-deprecating humour is appreciated
+- Don't oversell yourself - confidence without arrogance
+- Asking questions shows engagement, not ignorance
