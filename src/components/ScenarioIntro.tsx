@@ -52,7 +52,7 @@ export function ScenarioIntro({ scenario, onStart, onBack, isLoading = false }: 
         </div>
         <div className="role-box">
           <span className="role-label">Speaking with:</span>
-          <span className="role-value">{scenario.theirRole}</span>
+          <span className="role-value">{scenario.callerName} ({scenario.theirRole})</span>
         </div>
       </div>
 

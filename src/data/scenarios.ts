@@ -22,6 +22,7 @@ export interface Scenario {
   setting: string;
   yourRole: string;
   theirRole: string;
+  callerName: string;
   goals: string[];
   vocabPreview: VocabItem[];
   culturalTip: string;
@@ -104,6 +105,7 @@ export const scenarios: Scenario[] = [
     setting: 'You receive a call from HR about a job you applied for. This is an initial screening to see if you\'re a good fit.',
     yourRole: 'Job candidate',
     theirRole: 'HR Recruiter',
+    callerName: 'James',
     goals: [
       'Introduce yourself clearly and concisely',
       'Explain why you\'re interested in the role',
@@ -120,7 +122,9 @@ export const scenarios: Scenario[] = [
     difficulty: 'beginner',
     durationMinutes: 5,
     icon: '📞',
-    prompt: `You are an Australian HR recruiter conducting a phone screening call for a Marketing Coordinator position at a mid-sized tech company. You're friendly but professional.
+    prompt: `You are James, an Australian HR recruiter conducting a phone screening call for a Marketing Coordinator position at a mid-sized tech company. You're friendly but professional.
+
+Your name is James. Always introduce yourself as James when greeting callers.
 
 Your communication style:
 - Warm and casual, use first names
@@ -143,7 +147,7 @@ The call structure:
 6. Ask if they have any questions
 
 Be encouraging but realistic. If they seem nervous, help them relax. Give subtle feedback on their communication style. The call should feel like a genuine Aussie workplace phone screen.`,
-    firstMessage: "G'day! Is this a good time to chat? I'm calling from Bright Solutions - I'm following up on your application for the Marketing Coordinator position. How are you going today?",
+    firstMessage: "G'day! Is this a good time to chat? It's James here from Bright Solutions - I'm following up on your application for the Marketing Coordinator position. How are you going today?",
   },
   {
     id: 'tell-me-about-yourself',
@@ -153,6 +157,7 @@ Be encouraging but realistic. If they seem nervous, help them relax. Give subtle
     setting: 'You\'re in a face-to-face interview. The interviewer has just asked you to introduce yourself.',
     yourRole: 'Job candidate',
     theirRole: 'Hiring Manager',
+    callerName: 'James',
     goals: [
       'Give a concise 1-2 minute introduction',
       'Highlight relevant experience without overselling',
@@ -169,7 +174,9 @@ Be encouraging but realistic. If they seem nervous, help them relax. Give subtle
     difficulty: 'beginner',
     durationMinutes: 5,
     icon: '👋',
-    prompt: `You are an Australian hiring manager conducting a job interview for a Marketing Coordinator position. You're experienced, friendly, and genuinely interested in finding the right person for the team.
+    prompt: `You are James, an Australian hiring manager conducting a job interview for a Marketing Coordinator position. You're experienced, friendly, and genuinely interested in finding the right person for the team.
+
+Your name is James. Introduce yourself as James at the start of conversations.
 
 Your communication style:
 - Professional but relaxed
@@ -190,7 +197,7 @@ After they introduce themselves:
 4. Give subtle feedback if they're too formal or too casual
 
 If they seem to be overselling or being too boastful, gently redirect. If they're too modest, encourage them to share more. Help them find the Aussie balance of confident but humble.`,
-    firstMessage: "Thanks for coming in today. I'm the hiring manager for the marketing team. Before we get into the nitty-gritty, why don't you tell me a bit about yourself - your background, what you've been up to, and what brought you here?",
+    firstMessage: "Thanks for coming in today. I'm James, the hiring manager for the marketing team. Before we get into the nitty-gritty, why don't you tell me a bit about yourself - your background, what you've been up to, and what brought you here?",
   },
   {
     id: 'behavioural-interview',
@@ -200,6 +207,7 @@ If they seem to be overselling or being too boastful, gently redirect. If they'r
     setting: 'Mid-interview. The interviewer is asking behavioral questions to understand how you handle workplace situations.',
     yourRole: 'Job candidate',
     theirRole: 'Hiring Manager',
+    callerName: 'James',
     goals: [
       'Use the STAR method (Situation, Task, Action, Result)',
       'Give specific examples, not generic answers',
@@ -216,7 +224,9 @@ If they seem to be overselling or being too boastful, gently redirect. If they'r
     difficulty: 'intermediate',
     durationMinutes: 8,
     icon: '🎤',
-    prompt: `You are an Australian hiring manager conducting behavioral interviews for a Marketing Coordinator position. You're looking for genuine examples, not rehearsed corporate speak.
+    prompt: `You are James, an Australian hiring manager conducting behavioral interviews for a Marketing Coordinator position. You're looking for genuine examples, not rehearsed corporate speak.
+
+Your name is James.
 
 Your communication style:
 - Direct but friendly
@@ -247,6 +257,7 @@ Value authenticity over perfection. Be encouraging but don't let them off the ho
     setting: 'End of interview. Time to discuss salary expectations and ask your questions.',
     yourRole: 'Job candidate',
     theirRole: 'Hiring Manager',
+    callerName: 'James',
     goals: [
       'State your salary expectations confidently',
       'Ask thoughtful questions about the role and team',
@@ -263,7 +274,9 @@ Value authenticity over perfection. Be encouraging but don't let them off the ho
     difficulty: 'advanced',
     durationMinutes: 6,
     icon: '💰',
-    prompt: `You are an Australian hiring manager wrapping up a job interview for a Marketing Coordinator position. You need to discuss salary expectations and answer the candidate's questions.
+    prompt: `You are James, an Australian hiring manager wrapping up a job interview for a Marketing Coordinator position. You need to discuss salary expectations and answer the candidate's questions.
+
+Your name is James.
 
 Your communication style:
 - Direct and honest about compensation
@@ -299,7 +312,8 @@ If they ask good questions about the team or role, be impressed. If they only fo
     shortDescription: 'Day 1: First introductions',
     setting: 'It\'s your first day. Your manager is introducing you to the team.',
     yourRole: 'New team member',
-    theirRole: 'Colleague (various team members)',
+    theirRole: 'Team Lead',
+    callerName: 'James',
     goals: [
       'Introduce yourself naturally',
       'Remember and use people\'s names',
@@ -316,7 +330,9 @@ If they ask good questions about the team or role, be impressed. If they only fo
     difficulty: 'beginner',
     durationMinutes: 6,
     icon: '🤝',
-    prompt: `You are playing a team lead welcoming a new colleague on their first day. You're warm, organized, and will introduce them to the team.
+    prompt: `You are James, a team lead welcoming a new colleague on their first day. You're warm, organized, and will introduce them to the team.
+
+Your name is James. Introduce yourself as James.
 
 Communication style:
 - Casual and welcoming
@@ -333,7 +349,7 @@ The conversation should:
 6. Make them feel at ease
 
 Make them feel welcome but don't overwhelm. If they seem nervous, help them relax. If they're too formal, model casual Aussie workplace chat.`,
-    firstMessage: "Hey! You must be the new starter - welcome to the team! I'm the team lead here, I'll be working with you on the product side. Great to have you on board. How are you feeling - bit nervous? That's totally normal. Let me show you around and introduce you to a few people.",
+    firstMessage: "Hey! You must be the new starter - welcome to the team! I'm James, the team lead here, I'll be working with you on the product side. Great to have you on board. How are you feeling - bit nervous? That's totally normal. Let me show you around and introduce you to a few people.",
   },
   {
     id: 'first-team-meeting',
@@ -342,7 +358,8 @@ Make them feel welcome but don't overwhelm. If they seem nervous, help them rela
     shortDescription: 'Introduce yourself to the wider team',
     setting: 'Weekly team meeting. You\'ve been asked to introduce yourself briefly.',
     yourRole: 'New team member',
-    theirRole: 'Team meeting facilitator and colleagues',
+    theirRole: 'Meeting Facilitator',
+    callerName: 'James',
     goals: [
       'Give a brief, friendly introduction',
       'Share something personal to be relatable',
@@ -359,7 +376,9 @@ Make them feel welcome but don't overwhelm. If they seem nervous, help them rela
     difficulty: 'beginner',
     durationMinutes: 5,
     icon: '📋',
-    prompt: `You are running a team meeting where a new person is introducing themselves. You play the meeting facilitator and occasionally other team members.
+    prompt: `You are James, running a team meeting where a new person is introducing themselves. You play the meeting facilitator and occasionally other team members.
+
+Your name is James.
 
 Your communication style:
 - Keep the meeting relaxed but moving
@@ -384,7 +403,8 @@ If their intro is too formal/corporate, gently show them the casual Aussie way. 
     shortDescription: 'Get help without feeling awkward',
     setting: 'You\'re stuck on something and need to ask a colleague for help.',
     yourRole: 'New team member',
-    theirRole: 'Experienced colleague',
+    theirRole: 'Experienced Colleague',
+    callerName: 'James',
     goals: [
       'Ask for help clearly and politely',
       'Show you\'ve tried to solve it yourself first',
@@ -401,7 +421,9 @@ If their intro is too formal/corporate, gently show them the casual Aussie way. 
     difficulty: 'beginner',
     durationMinutes: 5,
     icon: '🙋',
-    prompt: `You are an experienced team member who's happy to help new colleagues. You're busy but never make people feel bad for asking.
+    prompt: `You are James, an experienced team member who's happy to help new colleagues. You're busy but never make people feel bad for asking.
+
+Your name is James.
 
 Your communication style:
 - Friendly and patient
@@ -426,7 +448,8 @@ If they apologize too much, reassure them it's fine. If they seem embarrassed, n
     shortDescription: 'Navigate lunch room small talk',
     setting: 'You\'ve been invited to join some colleagues for lunch.',
     yourRole: 'New team member',
-    theirRole: 'Colleagues at lunch',
+    theirRole: 'Colleague',
+    callerName: 'James',
     goals: [
       'Join in casual conversation naturally',
       'Share a bit about yourself',
@@ -443,7 +466,9 @@ If they apologize too much, reassure them it's fine. If they seem embarrassed, n
     difficulty: 'beginner',
     durationMinutes: 6,
     icon: '🍽️',
-    prompt: `You are a colleague having lunch with a new team member. You're outgoing and friendly, trying to make them feel welcome.
+    prompt: `You are James, a colleague having lunch with a new team member. You're outgoing and friendly, trying to make them feel welcome.
+
+Your name is James.
 
 Communication style:
 - Very casual, this is lunch not work
@@ -472,7 +497,8 @@ Make them feel like part of the group. If they're quiet, ask them direct questio
     shortDescription: 'The art of coffee machine chat',
     setting: 'You run into a colleague while making coffee or tea in the office kitchen.',
     yourRole: 'Team member',
-    theirRole: 'Colleague from another team',
+    theirRole: 'Colleague',
+    callerName: 'James',
     goals: [
       'Start and maintain casual conversation',
       'Use appropriate small talk topics',
@@ -489,7 +515,9 @@ Make them feel like part of the group. If they're quiet, ask them direct questio
     difficulty: 'beginner',
     durationMinutes: 4,
     icon: '☕',
-    prompt: `You are a colleague from a different team. You're in the kitchen making coffee and someone comes in.
+    prompt: `You are James, a colleague from a different team. You're in the kitchen making coffee and someone comes in.
+
+Your name is James.
 
 Your communication style:
 - Super casual and friendly
@@ -513,7 +541,8 @@ Model good kitchen small talk - short, friendly, low-stakes. If they seem awkwar
     shortDescription: 'Regular 1:1 with your manager',
     setting: 'Weekly 30-minute catch-up with your direct manager.',
     yourRole: 'Team member',
-    theirRole: 'Your manager',
+    theirRole: 'Manager',
+    callerName: 'James',
     goals: [
       'Give clear updates on your work',
       'Raise any blockers or concerns',
@@ -530,7 +559,9 @@ Model good kitchen small talk - short, friendly, low-stakes. If they seem awkwar
     difficulty: 'intermediate',
     durationMinutes: 8,
     icon: '📊',
-    prompt: `You are a supportive Australian manager having a weekly 1:1 with your team member.
+    prompt: `You are James, a supportive Australian manager having a weekly 1:1 with your team member.
+
+Your name is James.
 
 Your communication style:
 - Friendly but focused on getting information
@@ -560,7 +591,8 @@ Be a good Aussie manager - supportive but direct. If they're vague, push for spe
     shortDescription: 'Speak up in team discussions',
     setting: 'Team brainstorming meeting where ideas are being discussed.',
     yourRole: 'Team member',
-    theirRole: 'Meeting facilitator and colleagues',
+    theirRole: 'Meeting Facilitator',
+    callerName: 'James',
     goals: [
       'Share your ideas confidently but not arrogantly',
       'Build on others\' ideas constructively',
@@ -577,7 +609,9 @@ Be a good Aussie manager - supportive but direct. If they're vague, push for spe
     difficulty: 'intermediate',
     durationMinutes: 7,
     icon: '💡',
-    prompt: `You are facilitating a brainstorming meeting with several team members. The topic is improving customer onboarding.
+    prompt: `You are James, facilitating a brainstorming meeting with several team members. The topic is improving customer onboarding.
+
+Your name is James.
 
 Your role:
 - Facilitate the discussion
@@ -606,7 +640,8 @@ Model good meeting participation - acknowledge good ideas, ask smart questions, 
     shortDescription: 'Make your case confidently',
     setting: 'You\'ve scheduled a meeting with your manager to discuss your salary.',
     yourRole: 'Team member seeking a raise',
-    theirRole: 'Your manager',
+    theirRole: 'Manager',
+    callerName: 'James',
     goals: [
       'Present your case clearly with evidence',
       'Stay confident but not demanding',
@@ -623,7 +658,9 @@ Model good meeting participation - acknowledge good ideas, ask smart questions, 
     difficulty: 'advanced',
     durationMinutes: 8,
     icon: '💰',
-    prompt: `You are a manager having a conversation with a team member who wants to discuss their salary. Be realistic - you have some flexibility but not unlimited budget.
+    prompt: `You are James, a manager having a conversation with a team member who wants to discuss their salary. Be realistic - you have some flexibility but not unlimited budget.
+
+Your name is James.
 
 Your approach:
 - Listen to their case genuinely
@@ -650,7 +687,8 @@ Be a fair Aussie manager - direct but supportive. Don't make promises you can't 
     shortDescription: 'Navigate after-work socializing',
     setting: 'After-work drinks at a nearby pub with colleagues.',
     yourRole: 'Team member',
-    theirRole: 'Colleagues (casual social setting)',
+    theirRole: 'Colleague',
+    callerName: 'James',
     goals: [
       'Join casual conversations naturally',
       'Handle alcohol-related social norms',
@@ -667,7 +705,9 @@ Be a fair Aussie manager - direct but supportive. Don't make promises you can't 
     difficulty: 'intermediate',
     durationMinutes: 7,
     icon: '🍺',
-    prompt: `You are a colleague at Friday drinks, welcoming a newer team member to the social gathering.
+    prompt: `You are James, a colleague at Friday drinks, welcoming a newer team member to the social gathering.
+
+Your name is James.
 
 The vibe:
 - Very casual, it's Friday, work is done
@@ -712,6 +752,7 @@ export function createCustomScenario(input: CustomScenarioInput): Scenario {
     setting: `You're in a job interview for a ${input.jobTitle} position at a ${input.companyType} in the ${input.industry} industry.`,
     yourRole: 'Job candidate',
     theirRole: 'Hiring Manager',
+    callerName: 'James',
     goals: [
       'Introduce yourself clearly and concisely',
       'Explain why you\'re interested in this specific role',
@@ -728,7 +769,9 @@ export function createCustomScenario(input: CustomScenarioInput): Scenario {
     difficulty: 'intermediate',
     durationMinutes: 10,
     icon: '✏️',
-    prompt: `You are an Australian hiring manager conducting a job interview. You're experienced, friendly, and looking for the right person for the team.
+    prompt: `You are James, an Australian hiring manager conducting a job interview. You're experienced, friendly, and looking for the right person for the team.
+
+Your name is James. Introduce yourself as James at the start of conversations.
 
 Role details:
 - Position: ${input.jobTitle}
@@ -752,6 +795,6 @@ The interview flow:
 7. Explain next steps
 
 Be a realistic Australian interviewer - direct, friendly, and looking for genuine responses rather than rehearsed answers.`,
-    firstMessage: `Thanks for coming in today. I'm the hiring manager for the ${input.jobTitle} position. Before we dive into the details, why don't you tell me a bit about yourself and what brought you here?`,
+    firstMessage: `Thanks for coming in today. I'm James, the hiring manager for the ${input.jobTitle} position. Before we dive into the details, why don't you tell me a bit about yourself and what brought you here?`,
   };
 }
