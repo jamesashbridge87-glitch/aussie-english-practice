@@ -697,6 +697,10 @@
 
 /* Mute button */
 .mute-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2, 8px);
   padding: 14px 32px;
   border: 2px solid var(--color-gray-300);
   border-radius: 30px;
@@ -706,6 +710,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.mute-btn svg {
+  flex-shrink: 0;
 }
 
 .mute-btn:hover {

@@ -16,20 +16,16 @@ import { UserMenu } from './UserMenu';
 import { UsageBadge } from './UsageBadge';
 import { SubscriptionPlans } from './SubscriptionPlans';
 import { SessionTimer } from './SessionTimer';
+import { SessionTranscript, TranscriptMessage } from './SessionTranscript';
 import { Scenario, getCategoryInfo, CustomScenarioInput, createCustomScenario } from '../data/scenarios';
 import './AussieEnglishPractice.css';
-
-interface Message {
-  role: 'user' | 'agent';
-  content: string;
-  timestamp: Date;
-}
 
 type ViewState = 'selector' | 'intro' | 'session' | 'custom-form';
 
 export function AussieEnglishPractice() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<TranscriptMessage[]>([]);
   const [viewState, setViewState] = useState<ViewState>('selector');
+  const messageIdCounter = useRef(0);
   const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showProgress, setShowProgress] = useState(false);
@@ -93,15 +89,27 @@ export function AussieEnglishPractice() {
     },
     onMessage: (message) => {
       if (message.source === 'user' && message.message) {
+        messageIdCounter.current += 1;
         setMessages((prev) => [
           ...prev,
-          { role: 'user', content: message.message, timestamp: new Date() },
+          {
+            id: `msg-${messageIdCounter.current}`,
+            role: 'user',
+            content: message.message,
+            timestamp: new Date()
+          },
         ]);
         incrementMessageCount();
       } else if (message.source === 'ai' && message.message) {
+        messageIdCounter.current += 1;
         setMessages((prev) => [
           ...prev,
-          { role: 'agent', content: message.message, timestamp: new Date() },
+          {
+            id: `msg-${messageIdCounter.current}`,
+            role: 'agent',
+            content: message.message,
+            timestamp: new Date()
+          },
         ]);
       }
     },
@@ -426,40 +434,46 @@ export function AussieEnglishPractice() {
             )}
           </div>
 
-          {/* Conversation display */}
-          <div className="conversation-display">
-            {messages.length === 0 ? (
-              <div className="empty-state">
-                Just start speaking - the conversation will begin!
-              </div>
-            ) : (
-              messages.map((msg, index) => (
-                <div key={index} className={`message ${msg.role}`}>
-                  <span className="message-role">
-                    {msg.role === 'user' ? 'You' : selectedScenario.theirRole}
-                  </span>
-                  <p className="message-content">{msg.content}</p>
-                </div>
-              ))
-            )}
-          </div>
+          {/* Enhanced Conversation Transcript */}
+          <SessionTranscript
+            messages={messages}
+            agentName={selectedScenario.theirRole}
+            userName={studentName || 'You'}
+            isSpeaking={isSpeaking}
+            isListening={isListening}
+            isConnected={status === 'connected'}
+            highlightSlang={true}
+          />
 
           {/* Voice controls */}
           <div className="voice-input-section">
-            <div className="real-time-indicator">
-              {isSpeaking ? (
-                <span className="speaking-indicator">{selectedScenario.theirRole} is speaking...</span>
-              ) : isListening ? (
-                <span className="listening-indicator">Listening to you...</span>
-              ) : (
-                <span className="ready-indicator">Ready - just start talking!</span>
-              )}
-            </div>
             <button
               className={`mute-btn ${isMuted ? 'muted' : ''}`}
               onClick={toggleMute}
+              aria-label={isMuted ? 'Unmute microphone' : 'Mute microphone'}
             >
-              {isMuted ? 'Unmute' : 'Mute'}
+              {isMuted ? (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                    <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+                    <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                    <line x1="8" y1="23" x2="16" y2="23" />
+                  </svg>
+                  Unmute
+                </>
+              ) : (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                    <line x1="12" y1="19" x2="12" y2="23" />
+                    <line x1="8" y1="23" x2="16" y2="23" />
+                  </svg>
+                  Mute
+                </>
+              )}
             </button>
           </div>
 
