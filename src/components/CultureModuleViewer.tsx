@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { cultureModules, CultureModule, getCultureModuleById } from '../data/cultureModules';
 import './CultureModuleViewer.css';
 

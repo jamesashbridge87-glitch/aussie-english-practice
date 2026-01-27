@@ -661,7 +661,6 @@ Include:
 If they don't drink alcohol, make it totally fine - someone probably isn't drinking either. Make them feel included in the social dynamic.`,
     firstMessage: "Hey, you made it! *raises glass* Good stuff. What are you drinking? First round's on Tom apparently - it's his birthday next week so he's shouting. *Tom waves from the bar* What'll you have?",
   },
-];
 
   // ============================================
   // NEW SCENARIOS - PHASE 5

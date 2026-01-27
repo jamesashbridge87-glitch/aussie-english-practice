@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Scenario } from '../data/scenarios';
 import { getRandomEncouragement, getScenarioTip } from '../data/feedbackMessages';
 import './PostSessionFeedback.css';

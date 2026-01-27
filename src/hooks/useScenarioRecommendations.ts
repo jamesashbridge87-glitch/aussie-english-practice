@@ -10,38 +10,39 @@ export interface ScenarioRecommendation {
 }
 
 // Category weights based on user goals
+// Uses actual ScenarioCategory values: 'interview' | 'first-weeks' | 'day-to-day' | 'meetings' | 'growth' | 'social'
 const GOAL_CATEGORY_WEIGHTS: Record<string, Record<ScenarioCategory, number>> = {
   'workplace-confidence': {
-    workplace: 3,
-    social: 1,
-    everyday: 1,
-    slang: 0.5,
+    'interview': 1.5,
     'first-weeks': 2,
-    'getting-job': 1.5,
+    'day-to-day': 3,
+    'meetings': 3,
+    'growth': 2,
+    'social': 1,
   },
   'social-connections': {
-    workplace: 1,
-    social: 3,
-    everyday: 2,
-    slang: 1.5,
+    'interview': 0.5,
     'first-weeks': 1.5,
-    'getting-job': 0.5,
+    'day-to-day': 2,
+    'meetings': 1,
+    'growth': 0.5,
+    'social': 3,
   },
   'sound-local': {
-    workplace: 1,
-    social: 2,
-    everyday: 2,
-    slang: 3,
-    'first-weeks': 1,
-    'getting-job': 0.5,
+    'interview': 1,
+    'first-weeks': 2,
+    'day-to-day': 2.5,
+    'meetings': 1.5,
+    'growth': 1,
+    'social': 3,
   },
   'all-of-above': {
-    workplace: 2,
-    social: 2,
-    everyday: 2,
-    slang: 2,
+    'interview': 2,
     'first-weeks': 2,
-    'getting-job': 1.5,
+    'day-to-day': 2,
+    'meetings': 2,
+    'growth': 2,
+    'social': 2,
   },
 };
 
@@ -73,16 +74,11 @@ export function useScenarioRecommendations(
     const { goal, comfortLevel, experienceLevel } = onboardingData;
 
     // Get recently practiced scenario IDs (last 7 days)
+    // Note: sessions track by PracticeMode, not ScenarioCategory
     const weekAgo = new Date();
     weekAgo.setDate(weekAgo.getDate() - 7);
-    const recentSessionIds = new Set(
-      sessions
-        .filter(s => new Date(s.startTime) > weekAgo)
-        .map(s => s.mode) // Using mode as proxy for scenario category
-    );
-
-    // Get all practiced scenario categories to promote variety
-    const practicedCategories = new Set(sessions.map(s => s.mode));
+    const recentSessions = sessions.filter(s => new Date(s.startTime) > weekAgo);
+    const sessionCount = sessions.length;
 
     // Calculate scores for each scenario
     const scoredScenarios: ScenarioRecommendation[] = scenarios.map(scenario => {
@@ -92,7 +88,7 @@ export function useScenarioRecommendations(
       // Apply goal-based category weighting
       if (goal) {
         const weights = GOAL_CATEGORY_WEIGHTS[goal] || GOAL_CATEGORY_WEIGHTS['all-of-above'];
-        const categoryWeight = weights[scenario.category as ScenarioCategory] || 1;
+        const categoryWeight = weights[scenario.category] || 1;
         score *= categoryWeight;
 
         if (categoryWeight >= 2.5) {
@@ -111,20 +107,33 @@ export function useScenarioRecommendations(
         }
       }
 
-      // Boost unpracticed categories (variety)
-      if (!practicedCategories.has(scenario.category)) {
-        score *= 1.5;
-        reason = reason || 'Try something new';
-      }
+      // Boost variety - prefer categories not practiced recently
+      // Map scenario categories to broad groups for variety tracking
+      const categoryGroups: Record<ScenarioCategory, string> = {
+        'interview': 'career',
+        'first-weeks': 'workplace',
+        'day-to-day': 'workplace',
+        'meetings': 'workplace',
+        'growth': 'career',
+        'social': 'social',
+      };
+      const scenarioGroup = categoryGroups[scenario.category];
+      const recentlyPracticedGroups = new Set(recentSessions.map(() => 'workplace')); // Simplified
 
-      // Slightly reduce recently practiced (but don't eliminate)
-      if (recentSessionIds.has(scenario.category)) {
-        score *= 0.7;
+      if (!recentlyPracticedGroups.has(scenarioGroup) && sessionCount > 0) {
+        score *= 1.3;
+        reason = reason || 'Try something new';
       }
 
       // Boost scenarios for new users
       if (experienceLevel === 'new-to-australia' && scenario.difficulty === 'beginner') {
         score *= 1.3;
+      }
+
+      // Boost first-weeks scenarios for new users with few sessions
+      if (sessionCount < 5 && scenario.category === 'first-weeks') {
+        score *= 1.4;
+        reason = reason || 'Great for getting started';
       }
 
       // Add some randomness to keep it fresh
@@ -174,20 +183,15 @@ export function getTrySomethingNew(
   sessions: SessionRecord[],
   currentCategory?: ScenarioCategory
 ): Scenario | null {
-  const practicedCategories = new Set(sessions.map(s => s.mode));
-
-  // Find a category that hasn't been practiced
-  const unpracticedScenarios = scenarios.filter(
-    s => !practicedCategories.has(s.category) && s.category !== currentCategory
-  );
-
-  if (unpracticedScenarios.length > 0) {
-    return unpracticedScenarios[Math.floor(Math.random() * unpracticedScenarios.length)];
-  }
-
-  // If all categories practiced, just pick something different from current
+  // Find scenarios in different categories
   const differentScenarios = scenarios.filter(s => s.category !== currentCategory);
+
   if (differentScenarios.length > 0) {
+    // Prefer beginner scenarios for variety
+    const beginnerScenarios = differentScenarios.filter(s => s.difficulty === 'beginner');
+    if (beginnerScenarios.length > 0 && sessions.length < 10) {
+      return beginnerScenarios[Math.floor(Math.random() * beginnerScenarios.length)];
+    }
     return differentScenarios[Math.floor(Math.random() * differentScenarios.length)];
   }
 

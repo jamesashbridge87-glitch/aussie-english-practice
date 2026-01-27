@@ -283,10 +283,11 @@ export function AussieEnglishPractice() {
   };
 
   // Handle post-session feedback completion
-  const handlePostSessionComplete = (feeling: SessionFeeling) => {
+  const handlePostSessionComplete = (_feeling: SessionFeeling) => {
     setShowPostSessionFeedback(false);
     setCompletedScenario(null);
     // Show subscription prompt for anonymous users after session feedback
+    // Note: feeling can be used for analytics in the future
     if (!isAuthenticated) {
       setShowPlans(true);
     }

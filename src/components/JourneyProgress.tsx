@@ -1,4 +1,4 @@
-import { JourneyProgress, JourneyPhase, JOURNEY_PHASES } from '../hooks/useJourneyProgress';
+import { JourneyProgress, JOURNEY_PHASES } from '../hooks/useJourneyProgress';
 import './JourneyProgress.css';
 
 interface JourneyProgressProps {
@@ -10,13 +10,11 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
     currentDay,
     currentWeek,
     currentPhase,
-    phaseProgress,
     overallProgress,
     daysUntilNextPhase,
     isNewPhase,
     recommendation,
     weeklyGoal,
-    phaseHistory,
   } = progress;
 
   const isStarted = currentDay > 0;
@@ -65,7 +63,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
           </div>
         </div>
         <div className="progress-phases">
-          {JOURNEY_PHASES.map((phase, index) => (
+          {JOURNEY_PHASES.map((phase) => (
             <span
               key={phase.id}
               className={`progress-phase-label ${phase.id === currentPhase.id ? 'active' : ''}`}
@@ -77,7 +75,7 @@ export function JourneyProgressDisplay({ progress }: JourneyProgressProps) {
       </div>
 
       {/* Next phase countdown */}
-      {daysUntilNextPhase > 0 && isStarted && (
+      {daysUntilNextPhase > 0 && currentDay > 0 && (
         <div className="next-phase-countdown">
           <span className="countdown-number">{daysUntilNextPhase}</span>
           <span className="countdown-label">days until next phase</span>
@@ -130,7 +128,7 @@ export function JourneyTimeline({ progress }: JourneyTimelineProps) {
           const historyEntry = phaseHistory.find(h => h.phase.id === phase.id);
           const isCurrentPhase = phase.id === currentPhase.id;
           const isCompleted = historyEntry?.completedAt !== undefined;
-          const isStarted = historyEntry !== undefined;
+          void historyEntry; // Track if phase has been started for future use
 
           let status: 'completed' | 'current' | 'upcoming' = 'upcoming';
           if (isCompleted) status = 'completed';
